@@ -16,12 +16,14 @@ const AddJournal = () => {
     issue: "",
     publicationFrequency: "MONTHLY",
     publisher: "",
-    description: ""
+    description: "",
+    coverImage: "", // ถ้ามีรูป
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setJournal((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type } = e.target;
+    const val = type === "number" ? Number(value) : value;
+    setJournal((prev) => ({ ...prev, [name]: val }));
   };
 
   const resetForm = () => {
@@ -35,33 +37,39 @@ const AddJournal = () => {
       issue: "",
       publicationFrequency: "MONTHLY",
       publisher: "",
-      description: ""
+      description: "",
+      coverImage: "",
     });
   };
 
   const handleSubmit = async (e) => {
     e?.preventDefault();
 
-    const filteredJournalData = Object.entries(journal).reduce((acc, [key, value]) => {
-      if (value !== "") {
-        acc[key] = value;
-      }
+    // Clean & filter
+    const numericFields = ["publishYear", "volume", "issue"];
+    const cleanedData = Object.entries(journal).reduce((acc, [key, value]) => {
+      if (numericFields.includes(key) && value === "") acc[key] = null;
+      else acc[key] = value;
+      return acc;
+    }, {});
+
+    const filteredData = Object.entries(cleanedData).reduce((acc, [key, value]) => {
+      if (value !== "") acc[key] = value;
       return acc;
     }, {});
 
     try {
-      const newJournal = await JournalService.createJournal(filteredJournalData);
+      const newJournal = await JournalService.createJournal(filteredData);
 
       if (newJournal.status === 201 || newJournal.status === 200) {
         await Swal.fire({
           title: "Add new journal",
-          text: "Add new journal successfully!",
+          text: "Journal added successfully!",
           icon: "success",
         });
         resetForm();
         navigate("/journals");
       }
-
     } catch (error) {
       await Swal.fire({
         title: "Add new journal",
@@ -73,45 +81,110 @@ const AddJournal = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-purple-50 via-purple-100 to-yellow-50 py-10">
-      <div className="w-full max-w-3xl p-8 bg-white rounded-3xl shadow-xl ring-2 ring-purple-200">
-        <h1 className="text-3xl font-bold text-center text-purple-700 mb-8 drop-shadow-md">
-          Add Journal
-        </h1>
+    <div className="relative flex flex-col justify-center min-h-screen overflow-hidden mt-10">
+      <div className="container mx-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full p-8 m-auto bg-gradient-to-r from-indigo-100 via-pink-100 to-yellow-100 rounded-2xl shadow-lg ring-2 ring-pink-300/50 max-w-2xl"
+        >
+          <h1 className="text-3xl font-bold text-center text-purple-700 mb-8">
+            📝 Add a New Journal
+          </h1>
 
-        <form className="space-y-5" onSubmit={handleSubmit}>
-          {Object.keys(journal).map((key) => (
-            <div key={key}>
+          <div className="space-y-5">
+            <div>
               <label className="label">
-                <span className="text-base font-medium text-purple-800">
-                  {key.charAt(0).toUpperCase() + key.slice(1)}
-                </span>
+                <span className="text-base font-semibold label-text text-purple-800">Title</span>
               </label>
               <input
-                type={["publishYear", "volume", "issue"].includes(key) ? "number" : "text"}
-                placeholder={`Enter ${key}`}
-                name={key}
-                value={journal[key]}
+                type="text"
+                placeholder="Enter title"
+                className="w-full input input-bordered border-purple-300 focus:border-purple-500 focus:ring focus:ring-purple-200 rounded-lg"
+                name="title"
+                value={journal.title}
                 onChange={handleChange}
-                className="w-full input input-bordered border-purple-300 focus:ring-2 focus:ring-purple-300 rounded-xl"
+                required
               />
             </div>
-          ))}
 
-          <div className="flex justify-center gap-6 mt-6">
-            <button
-              type="submit"
-              className="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold shadow-lg transition transform hover:scale-105"
-            >
-              Add
-            </button>
-            <button
-              type="button"
-              onClick={resetForm}
-              className="px-8 py-3 bg-yellow-400 hover:bg-yellow-500 text-purple-900 rounded-xl font-semibold shadow-md transition transform hover:scale-105"
-            >
-              Reset
-            </button>
+            <div>
+              <label className="label">
+                <span className="text-base font-semibold label-text text-purple-800">Author</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter author"
+                className="w-full input input-bordered border-purple-300 focus:border-purple-500 focus:ring focus:ring-purple-200 rounded-lg"
+                name="author"
+                value={journal.author}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div>
+              <label className="label">
+                <span className="text-base font-semibold label-text text-purple-800">Category</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter category"
+                className="w-full input input-bordered border-purple-300 focus:border-purple-500 focus:ring focus:ring-purple-200 rounded-lg"
+                name="category"
+                value={journal.category}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div>
+              <label className="label">
+                <span className="text-base font-semibold label-text text-purple-800">Publish Year</span>
+              </label>
+              <input
+                type="number"
+                placeholder="Enter publish year"
+                className="w-full input input-bordered border-purple-300 focus:border-purple-500 focus:ring focus:ring-purple-200 rounded-lg"
+                name="publishYear"
+                value={journal.publishYear}
+                onChange={handleChange}
+                min="0"
+              />
+            </div>
+
+            {/* Cover Image preview */}
+            <div>
+              <label className="label">
+                <span className="text-base font-semibold label-text text-purple-800">Cover Image URL</span>
+              </label>
+              <input
+                type="text"
+                className="w-full input input-bordered border-purple-300 focus:border-purple-500 focus:ring focus:ring-purple-200 rounded-lg"
+                value={journal.coverImage}
+                onChange={handleChange}
+                placeholder="https://example.com/image.jpg"
+                name="coverImage"
+              />
+              {journal.coverImage && (
+                <div className="flex items-center justify-center mt-3">
+                  <img className="h-40 rounded-lg shadow-md" src={journal.coverImage} alt="cover preview" />
+                </div>
+              )}
+            </div>
+
+            <div className="flex justify-center items-center my-6 space-x-6">
+              <button
+                type="submit"
+                className="btn bg-purple-500 hover:bg-purple-600 text-white px-8 py-2 rounded-xl shadow-md transition-all duration-200"
+              >
+                Add
+              </button>
+              <button
+                type="button"
+                className="btn bg-gray-200 hover:bg-gray-300 text-gray-800 px-8 py-2 rounded-xl shadow-md transition-all duration-200"
+                onClick={resetForm}
+              >
+                Reset
+              </button>
+            </div>
           </div>
         </form>
       </div>
