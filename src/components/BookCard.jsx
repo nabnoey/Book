@@ -18,47 +18,51 @@ const BookCard = (props) => {
   };
 
   return (
-   <div className="w-80 bg-white border border-pink-100 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-  
-  <div className="p-6">
-   
-    {props.coverImage ? (
-      <img
-        src={props.coverImage}
-        alt={props.title}
-        className="w-full h-48 object-cover rounded-md mb-4"
-      />
-    ) : (
-      <div className="w-full h-48 bg-pink-50 flex items-center justify-center text-gray-400 text-sm rounded-md mb-4">
-        No Image
+    <div className="w-80 bg-gradient-to-br from-purple-50 via-yellow-50 to-purple-50 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden transform hover:scale-105">
+      <div className="p-5">
+        {/* Cover Image */}
+        {props.coverImage ? (
+          <img
+            src={props.coverImage}
+            alt={props.title}
+            className="w-full h-56 object-cover rounded-xl mb-4 border-2 border-purple-200"
+          />
+        ) : (
+          <div className="w-full h-56 bg-purple-100 flex items-center justify-center text-gray-400 text-sm rounded-xl mb-4 border-2 border-purple-200">
+            No Image
+          </div>
+        )}
+
+        {/* Title */}
+        <h2 className="text-2xl font-bold text-purple-700 mb-3 drop-shadow-sm">
+          {props.title}
+        </h2>
+
+        {/* Info */}
+        <div className="text-gray-700 space-y-2 text-sm">
+          <p><strong>Author:</strong> {props.author}</p>
+          <p><strong>Genre:</strong> {props.genre}</p>
+          <p><strong>Publication Date:</strong> {props.publicationDate}</p>
+          <p><strong>ISBN:</strong> {props.isbn}</p>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-between mt-6">
+          <button
+            onClick={() => handleDelete(props.itemId)}
+            className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-xl transition-all duration-200 mr-2 shadow-md hover:shadow-lg"
+          >
+            Delete
+          </button>
+          <a
+            href={`/updateBook/${props.itemId}`}
+            className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-4 py-2 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
+          >
+            Edit
+          </a>
+        </div>
       </div>
-    )}
-
-    <h2 className="text-xl font-semibold text-pink-700 mb-4">{props.title}</h2>
-
-    <div className="text-gray-700 space-y-2 text-sm">
-      <p><strong>Author:</strong> {props.author}</p>
-      <p><strong>Genre:</strong> {props.genre}</p>
-      <p><strong>Publication Date:</strong> {props.publicationDate}</p>
-      <p><strong>ISBN:</strong> {props.isbn}</p>
     </div>
-
-    <div className="flex justify-end gap-3 mt-6">
-      <button
-        onClick={() => handleDelete(props.itemId)}
-        className="bg-red-400 hover:bg-red-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors duration-200"
-      >
-        Delete
-      </button>
-      <a
-        href={`/updateBook/${props.itemId}`}
-        className="bg-yellow-300 hover:bg-yellow-400 text-gray-800 font-semibold px-4 py-2 rounded-lg transition-colors duration-200"
-      >
-        Edit
-      </a>
-    </div>
-  </div>
-</div>
   );
 };
 
