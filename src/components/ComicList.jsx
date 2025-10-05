@@ -4,7 +4,7 @@ const ComicList = ({ comics }) => {
     return (
         <div className="flex">
             <div className="flex flex-wrap justify-center gap-4">
-                {Array.isArray(comics) &&
+                {comics &&
                     comics.map((comic) => (
                         <ComicCard
                             key={comic._id}

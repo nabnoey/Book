@@ -49,7 +49,7 @@ const AddBook = () => {
   const handleSubmit = async (e) => {
     e?.preventDefault();
 
-    const { location, ...bookData } = book;
+    const { ...bookData } = book;
     const numericFields = ["publishYear", "pageCount"];
 
     const cleanedData = Object.entries(bookData).reduce((acc, [key, value]) => {

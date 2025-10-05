@@ -7,19 +7,19 @@ const UpdateBook = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [book, setBook] = useState({
-    title: "",
-    author: "",
-    category: "",
-    publishYear: "",
-    isbn: "",
-    publisher: "",
-    edition: "",
-    pageCount: "",
-    language: "",
-    genre: "",
-    description: "",
-    coverImage: "",
-    location: "A1-B2-C3",
+    // title: "",
+    // author: "",
+    // category: "",
+    // publishYear: "",
+    // isbn: "",
+    // publisher: "",
+    // edition: "",
+    // pageCount: "",
+    // language: "",
+    // genre: "",
+    // description: "",
+    // coverImage: "",
+    // location: "A1-B2-C3",
   });
 
   useEffect(() => {
