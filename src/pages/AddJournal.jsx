@@ -33,7 +33,7 @@ const AddJournal = () => {
       issn: "",
       volume: "",
       issue: "",
-      publicationFrequency: "",
+      publicationFrequency: "MONTHLY",
       publisher: "",
       description: ""
     });
@@ -50,7 +50,7 @@ const AddJournal = () => {
     }, {});
 
     try {
-      const newJournal = await JournalService.createJournal(filteredJournalData)
+      const newJournal = await JournalService.createJournal(filteredJournalData);
 
       if (newJournal.status === 201 || newJournal.status === 200) {
         await Swal.fire({
@@ -73,154 +73,45 @@ const AddJournal = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center min-h-screen overflow-hidden mt-10">
-      <div className="container mx-auto">
-        <form
-          onSubmit={handleSubmit}
-          className="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 max-w-2xl"
-        >
-          <h1 className="text-2xl font-semibold text-center text-gray-700 mb-6">
-            Add Journal
-          </h1>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-purple-50 via-purple-100 to-yellow-50 py-10">
+      <div className="w-full max-w-3xl p-8 bg-white rounded-3xl shadow-xl ring-2 ring-purple-200">
+        <h1 className="text-3xl font-bold text-center text-purple-700 mb-8 drop-shadow-md">
+          Add Journal
+        </h1>
 
-          <div className="space-y-4">
-            <div>
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          {Object.keys(journal).map((key) => (
+            <div key={key}>
               <label className="label">
-                <span className="text-base label-text text-black">Title</span>
+                <span className="text-base font-medium text-purple-800">
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                </span>
               </label>
               <input
-                type="text"
-                placeholder="Enter title"
-                className="w-full input input-bordered"
-                name="title"
-                value={journal.title}
+                type={["publishYear", "volume", "issue"].includes(key) ? "number" : "text"}
+                placeholder={`Enter ${key}`}
+                name={key}
+                value={journal[key]}
                 onChange={handleChange}
-                required
+                className="w-full input input-bordered border-purple-300 focus:ring-2 focus:ring-purple-300 rounded-xl"
               />
             </div>
+          ))}
 
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Author</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter author"
-                className="w-full input input-bordered"
-                name="author"
-                value={journal.author}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Category</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter category"
-                className="w-full input input-bordered"
-                name="category"
-                value={journal.category}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Publish Year</span>
-              </label>
-              <input
-                type="number"
-                placeholder="Enter publish year"
-                className="w-full input input-bordered"
-                name="publishYear"
-                value={journal.publishYear}
-                onChange={handleChange}
-                min="0"
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">issn</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter issn"
-                className="w-full input input-bordered"
-                name="issn"
-                value={journal.issn}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">volume</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter volume"
-                className="w-full input input-bordered"
-                name="volume"
-                value={journal.volume}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">issue</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter issue"
-                className="w-full input input-bordered"
-                name="issue"
-                value={journal.issue}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">publisher</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter publisher"
-                className="w-full input input-bordered"
-                name="publisher"
-                value={journal.publisher}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Description</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter description"
-                className="w-full input input-bordered"
-                name="description"
-                value={journal.description}
-                onChange={handleChange}
-              />
-            </div>
-
-
-            <div className="flex justify-center items-center my-6 space-x-4">
-              <button type="submit" className="btn bg-green-500 text-white px-6">
-                Add
-              </button>
-              <button type="button" className="btn" onClick={resetForm}>
-                Reset
-              </button>
-            </div>
+          <div className="flex justify-center gap-6 mt-6">
+            <button
+              type="submit"
+              className="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-semibold shadow-lg transition transform hover:scale-105"
+            >
+              Add
+            </button>
+            <button
+              type="button"
+              onClick={resetForm}
+              className="px-8 py-3 bg-yellow-400 hover:bg-yellow-500 text-purple-900 rounded-xl font-semibold shadow-md transition transform hover:scale-105"
+            >
+              Reset
+            </button>
           </div>
         </form>
       </div>
@@ -228,4 +119,4 @@ const AddJournal = () => {
   );
 };
 
-export default AddJournal
+export default AddJournal;

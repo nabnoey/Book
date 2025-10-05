@@ -2,38 +2,48 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import ComicList from "../components/ComicList";
 import ComicService from "../services/comic.service";
-const Comics = () => {
-  const [comic, setComic] = useState([]);
-  
- 
-  useEffect(() => {
-    const getAllComic = async () => {
-      try {
-        const response = await ComicService.getAllComic()
 
+const Comics = () => {
+  const [comics, setComics] = useState([]);
+
+  useEffect(() => {
+    const getAllComics = async () => {
+      try {
+        const response = await ComicService.getAllComic();
         if (response.status === 200) {
-          setComic(response.data.data);
+          setComics(response.data.data);
         }
       } catch (error) {
         Swal.fire({
-          title: "Get All journal",
+          title: "Get All Comics",
           icon: "error",
           text: error?.response?.data?.message || error.message,
         });
       }
     };
 
-    getAllComic();
+    getAllComics();
   }, []);
+
   return (
-    <div className="flexcontainer mx-auto">
-      <div>
-        <h1 className=" flex title justify-center text-3xl text-center m-5 p-5">
+    <div className="max-w-7xl mx-auto px-4 py-10 bg-gradient-to-b from-purple-50 to-yellow-50 min-h-screen">
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-purple-700 mb-4 drop-shadow-md">
           Comics
         </h1>
-      </div >
+        <div className="flex justify-center">
+          <a
+            href="/addComic"
+            className="bg-yellow-400 hover:bg-yellow-500 text-purple-900 font-semibold px-6 py-2 rounded-full shadow-md hover:shadow-lg transition-all duration-200"
+          >
+            Add Comic
+          </a>
+        </div>
+      </div>
 
-      <ComicList comics={comic} />
+      {/* Comic List */}
+      <ComicList comics={comics} />
     </div>
   );
 };

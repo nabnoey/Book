@@ -9,14 +9,14 @@ export const BookList = ({ books }) => {
           .map((book) => (
             <BookCard
               key={book.itemId}
+              coverImage={book.coverImage}
               itemId={book.itemId}
               title={book.title}
               author={book.author}
               isbn={book.isbn}
               genre={book.genre}
               publicationDate={book.publicationDate}
-              price={book.price}
-              quantity={book.quantity}
+            
             />
           ))}
     </div>
