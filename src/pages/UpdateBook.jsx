@@ -6,21 +6,7 @@ import { useNavigate, useParams } from "react-router";
 const UpdateBook = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [book, setBook] = useState({
-    // title: "",
-    // author: "",
-    // category: "",
-    // publishYear: "",
-    // isbn: "",
-    // publisher: "",
-    // edition: "",
-    // pageCount: "",
-    // language: "",
-    // genre: "",
-    // description: "",
-    // coverImage: "",
-    // location: "A1-B2-C3",
-  });
+  const [book, setBook] = useState({});
 
   useEffect(() => {
     const updateBook = async (id) => {
@@ -75,199 +61,182 @@ const UpdateBook = () => {
     }
   };
 
-  return (
-    <div className="relative flex flex-col justify-center min-h-screen overflow-hidden mt-10">
-      <div className="container mx-auto">
-        <form
-          onSubmit={handleSubmit}
-          className="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 max-w-2xl"
-        >
-          <h1 className="text-2xl font-semibold text-center text-gray-700 mb-6">
-            Update Book
-          </h1>
+    return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 to-yellow-50 py-10">
+      <div className="w-full max-w-2xl text-purple-800 bg-white rounded-2xl shadow-xl p-8 ring-2 ring-purple-300">
+        <h1 className="text-3xl font-bold text-center text-purple-700 mb-6 drop-shadow-sm">
+          Update Book
+        </h1>
 
-          <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Title */}
+          <div>
+            <label className="block mb-1 font-semibold text-purple-700">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={book.title}
+              onChange={handleChange}
+              placeholder="Enter title"
+              className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              required
+            />
+          </div>
+
+          {/* Author & Category */}
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Title</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Author</label>
               <input
                 type="text"
-                placeholder="Enter title"
-                className="w-full input input-bordered"
-                name="title"
-                value={book.title}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Author</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter author"
-                className="w-full input input-bordered"
                 name="author"
                 value={book.author}
                 onChange={handleChange}
+                placeholder="Enter author"
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
-
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Category</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Category</label>
               <input
                 type="text"
-                placeholder="Enter category"
-                className="w-full input input-bordered"
                 name="category"
                 value={book.category}
                 onChange={handleChange}
+                placeholder="Enter category"
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
+          </div>
 
+          {/* Publish Year & ISBN */}
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Publish Year</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Publish Year</label>
               <input
                 type="number"
-                placeholder="Enter publish year"
-                className="w-full input input-bordered"
                 name="publishYear"
                 value={book.publishYear}
                 onChange={handleChange}
                 min="0"
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
-
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">ISBN</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">ISBN</label>
               <input
                 type="text"
-                placeholder="Enter ISBN"
-                className="w-full input input-bordered"
                 name="isbn"
                 value={book.isbn}
-                onChange={handleChange}
-                readOnly />
+                readOnly
+                className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 bg-gray-100"
+              />
             </div>
+          </div>
 
+          {/* Publisher & Edition */}
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Publisher</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Publisher</label>
               <input
                 type="text"
-                placeholder="Enter publisher"
-                className="w-full input input-bordered"
                 name="publisher"
                 value={book.publisher}
                 onChange={handleChange}
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
-
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Edition</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Edition</label>
               <input
                 type="text"
-                placeholder="Enter edition"
-                className="w-full input input-bordered"
                 name="edition"
                 value={book.edition}
                 onChange={handleChange}
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
+          </div>
 
+          {/* Page Count & Language */}
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Page Count</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Page Count</label>
               <input
                 type="number"
-                placeholder="Enter page count"
-                className="w-full input input-bordered"
                 name="pageCount"
                 value={book.pageCount}
                 onChange={handleChange}
                 min="0"
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
-
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Language</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Language</label>
               <input
                 type="text"
-                placeholder="Enter language"
-                className="w-full input input-bordered"
                 name="language"
                 value={book.language}
                 onChange={handleChange}
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
+          </div>
 
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Genre</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter genre"
-                className="w-full input input-bordered"
-                name="genre"
-                value={book.genre}
-                onChange={handleChange}
-              />
-            </div>
+          {/* Genre & Description */}
+          <div>
+            <label className="block mb-1 font-semibold text-purple-700">Genre</label>
+            <input
+              type="text"
+              name="genre"
+              value={book.genre}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            />
+          </div>
 
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Description</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter description"
-                className="w-full input input-bordered"
-                name="description"
-                value={book.description}
-                onChange={handleChange}
-              />
-            </div>
+          <div>
+            <label className="block mb-1 font-semibold text-purple-700">Description</label>
+            <input
+              type="text"
+              name="description"
+              value={book.description}
+              onChange={handleChange}
+              placeholder="Enter description"
+              className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            />
+          </div>
 
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Cover Image URL</span>
-              </label>
-              <input
-                type="text"
-                className="w-full input input-bordered"
-                value={book.coverImage}
-                onChange={handleChange}
-                placeholder="https://example.com/image.jpg"
-                name="coverImage"
-              />
-              {book.coverImage && (
-                <div className="flex items-center gap-2 mt-2">
-                  <img className="h-32" src={book.coverImage} alt="cover preview" />
-                </div>
-              )}
-            </div>
+          {/* Cover Image */}
+          <div>
+            <label className="block mb-1 font-semibold text-purple-700">Cover Image URL</label>
+            <input
+              type="text"
+              name="coverImage"
+              value={book.coverImage}
+              onChange={handleChange}
+              placeholder="https://example.com/image.jpg"
+              className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            />
+            {book.coverImage && (
+              <div className="mt-3 flex justify-center">
+                <img
+                  src={book.coverImage}
+                  alt="cover preview"
+                  className="h-40 rounded-lg shadow-md"
+                />
+              </div>
+            )}
+          </div>
 
-            <div className="flex justify-center items-center my-6 space-x-4">
-              <button type="submit" className="btn bg-green-500 text-white px-6">
-                Confirm
-              </button>
-            </div>
+          {/* Submit Button */}
+          <div className="flex justify-center mt-6">
+            <button
+              type="submit"
+              className="px-8 py-3 bg-gradient-to-r from-purple-500 to-yellow-400 text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition"
+            >
+              Update Book
+            </button>
           </div>
         </form>
       </div>

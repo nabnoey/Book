@@ -9,24 +9,11 @@ const UpdateJournal = () => {
   const navigate = useNavigate();
     const { id } = useParams();
 
-  const [journal, setJournal] = useState({
-    title: "",
-    author: "",
-    category: "",
-    publishYear: "",
-    issn: "",
-    volume: "",
-    issue: "",
-    publicationFrequency: "MONTHLY",
-    publisher: "",
-    description: "",
-    coverImage: ""
-  });
+  const [journal, setJournal] = useState({});
   useEffect(() => {
     const updateJournal = async (id) => {
       try {
         const resp = await JournalService.getJournalById(id);
-        // console.log(resp.data.data);
         if (resp.status === 200) {
           setJournal(resp.data.data);
         }
@@ -74,180 +61,161 @@ const UpdateJournal = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center min-h-screen overflow-hidden mt-10">
-      <div className="container mx-auto">
-        <form
-          onSubmit={handleSubmit}
-          className="w-full p-6 m-auto bg-white rounded-md shadow-md ring-2 ring-gray-800/50 max-w-2xl"
-        >
-          <h1 className="text-2xl font-semibold text-center text-gray-700 mb-6">
-             Update Journal
-          </h1>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 to-yellow-50 py-10">
+      <div className="w-full max-w-2xl text-purple-800 bg-white rounded-2xl shadow-xl p-8 ring-2 ring-purple-300">
+        <h1 className="text-3xl font-bold text-center text-purple-700 mb-6 drop-shadow-sm">
+          Update Journal
+        </h1>
 
-          <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Title */}
+          <div>
+            <label className="block mb-1 font-semibold text-purple-700">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={journal.title}
+              onChange={handleChange}
+              placeholder="Enter title"
+              className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              required
+            />
+          </div>
+
+          {/* Author & Category */}
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Title</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Author</label>
               <input
                 type="text"
-                placeholder="Enter title"
-                className="w-full input input-bordered"
-                name="title"
-                value={journal.title}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Author</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter author"
-                className="w-full input input-bordered"
                 name="author"
                 value={journal.author}
                 onChange={handleChange}
+                placeholder="Enter author"
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
-
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Category</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Category</label>
               <input
                 type="text"
-                placeholder="Enter category"
-                className="w-full input input-bordered"
                 name="category"
                 value={journal.category}
                 onChange={handleChange}
+                placeholder="Enter category"
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
+          </div>
 
+          {/* Publish Year & ISSN */}
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Publish Year</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Publish Year</label>
               <input
                 type="number"
-                placeholder="Enter publish year"
-                className="w-full input input-bordered"
                 name="publishYear"
                 value={journal.publishYear}
                 onChange={handleChange}
                 min="0"
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
-
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">issn</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">ISSN</label>
               <input
                 type="text"
-                placeholder="Enter issn"
-                className="w-full input input-bordered"
                 name="issn"
                 value={journal.issn}
-                onChange={handleChange}
                 readOnly
+                className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 bg-gray-100"
               />
             </div>
+          </div>
 
+          {/* Volume & Issue */}
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">volume</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Volume</label>
               <input
                 type="text"
-                placeholder="Enter volume"
-                className="w-full input input-bordered"
                 name="volume"
                 value={journal.volume}
                 onChange={handleChange}
+                className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
               />
             </div>
-
             <div>
-              <label className="label">
-                <span className="text-base label-text text-black">issue</span>
-              </label>
+              <label className="block mb-1 font-semibold text-purple-700">Issue</label>
               <input
                 type="text"
-                placeholder="Enter issue"
-                className="w-full input input-bordered"
                 name="issue"
                 value={journal.issue}
-                onChange={handleChange}
                 readOnly
+                className="w-full px-4 py-2 rounded-lg border-2 border-gray-300 bg-gray-100"
               />
             </div>
+          </div>
 
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">publisher</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter publisher"
-                className="w-full input input-bordered"
-                name="publisher"
-                value={journal.publisher}
-                onChange={handleChange}
-              />
-            </div>
+          {/* Publisher & Description */}
+          <div>
+            <label className="block mb-1 font-semibold text-purple-700">Publisher</label>
+            <input
+              type="text"
+              name="publisher"
+              value={journal.publisher}
+              onChange={handleChange}
+              className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            />
+          </div>
 
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Description</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter description"
-                className="w-full input input-bordered"
-                name="description"
-                value={journal.description}
-                onChange={handleChange}
-              />
-            </div>
+          <div>
+            <label className="block mb-1 font-semibold text-purple-700">Description</label>
+            <input
+              type="text"
+              name="description"
+              value={journal.description}
+              onChange={handleChange}
+              placeholder="Enter description"
+              className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            />
+          </div>
 
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">Cover Image URL</span>
-              </label>
-              <input
-                type="text"
-                className="w-full input input-bordered"
-                value={journal.coverImage}
-                onChange={handleChange}
-                placeholder="https://example.com/image.jpg"
-                name="coverImage"
-              />
-              {journal.coverImage && (
-                <div className="flex items-center gap-2 mt-2">
-                  <img className="h-32" src={journal.coverImage} alt="cover preview" />
-                </div>
-              )}
-            </div>
+          {/* Cover Image */}
+          <div>
+            <label className="block mb-1 font-semibold text-purple-700">Cover Image URL</label>
+            <input
+              type="text"
+              name="coverImage"
+              value={journal.coverImage}
+              onChange={handleChange}
+              placeholder="https://example.com/image.jpg"
+              className="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:outline-none focus:ring-2 focus:ring-yellow-300"
+            />
+            {journal.coverImage && (
+              <div className="mt-3 flex justify-center">
+                <img
+                  src={journal.coverImage}
+                  alt="cover preview"
+                  className="h-40 rounded-lg shadow-md"
+                />
+              </div>
+            )}
+          </div>
 
-
-
-            <div className="flex justify-center items-center my-6 space-x-4">
-              <button type="submit" className="btn bg-green-500 text-white px-6">
-                Confirm
-              </button>
-            </div>
+          {/* Submit Button */}
+          <div className="flex justify-center mt-6">
+            <button
+              type="submit"
+              className="px-8 py-3 bg-gradient-to-r from-purple-500 to-yellow-400 text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition"
+            >
+              Update Journal
+            </button>
           </div>
         </form>
       </div>
     </div>
   );
+};
 
-
-}
-
-export default UpdateJournal
+export default UpdateJournal;
