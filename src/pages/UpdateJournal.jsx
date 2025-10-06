@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import JournalService from "../services/journal.service.js";
+import JournalService from "../services/journal.service"
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router";
 
