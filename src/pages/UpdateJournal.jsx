@@ -9,7 +9,17 @@ const UpdateJournal = () => {
   const navigate = useNavigate();
     const { id } = useParams();
 
-  const [journal, setJournal] = useState({});
+  const [journal, setJournal] = useState({  title: "",
+    author: "",
+    category: "",
+    publishYear: "",
+    issn: "",
+    volume: "",
+    issue: "",
+    publicationFrequency: "MONTHLY",
+    publisher: "",
+    description: "",
+    coverImage: ""});
   useEffect(() => {
     const updateJournal = async (id) => {
       try {

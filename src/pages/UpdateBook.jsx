@@ -6,7 +6,21 @@ import { useNavigate, useParams } from "react-router";
 const UpdateBook = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [book, setBook] = useState({});
+  const [book, setBook] = useState({
+       title: "",
+    author: "",
+    category: "",
+    publishYear: "",
+    isbn: "",
+    publisher: "",
+    edition: "",
+    pageCount: "",
+    language: "",
+    genre: "",
+    description: "",
+    coverImage: "",
+    location: "A1-B2-C3",
+  });
 
   useEffect(() => {
     const updateBook = async (id) => {

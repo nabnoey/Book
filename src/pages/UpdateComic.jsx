@@ -8,7 +8,20 @@ const UpdateComic = () => {
   const navigate = useNavigate();
     const { id } = useParams();
 
-  const [comic, setComic] = useState({});
+  const [comic, setComic] = useState({
+     title: "",
+    author: "",
+    category: "",
+    publishYear: "",
+    isbn: "",
+    series: "",
+    volumeNumber: "",
+    illustrator: "",
+    colorType: "",
+    targetAge: "",
+    description: "",
+    coverImage: ""
+  });
   useEffect(() => {
     const updateComic = async (id) => {
       try {
