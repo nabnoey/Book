@@ -26,7 +26,6 @@ const UpdateComic = () => {
     const updateComic = async (id) => {
       try {
         const resp = await ComicService.getComicById(id);
-        // console.log(resp.data.data);
         if (resp.status === 200) {
           setComic(resp.data.data);
         }
