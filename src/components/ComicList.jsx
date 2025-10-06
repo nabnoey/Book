@@ -7,8 +7,8 @@ const ComicList = ({ comics }) => {
                 {comics &&
                     comics.map((comic) => (
                         <ComicCard
-                            key={comic._id}
-                            itemId={comic._id}
+                            key={comic.itemId}
+                            itemId={comic.itemId}
                             title={comic.title}
                             author={comic.author}
                             category={comic.category}

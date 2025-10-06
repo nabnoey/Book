@@ -4,10 +4,10 @@ const JournalList = ({ journals }) => {
     return (
         <div className="flex">
             <div className="flex flex-wrap justify-center gap-4">
-                    {journals.map((journal) => (
+                    {journals && journals.map((journal) => (
                     <JournalCard
-                        key={journal._id}
-                        itemId={journal._id}
+                        key={journal.itemId}
+                        itemId={journal.itemId}
                         coverImage={journal.coverImage}
                         title={journal.title}
                         author={journal.author}

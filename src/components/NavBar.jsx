@@ -60,7 +60,7 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-white rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
+              className="menu menu-sm dropdown-content text-purple-700 bg-white rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
             >
               {menuItems.map((item, index) => (
                 <li key={index}>

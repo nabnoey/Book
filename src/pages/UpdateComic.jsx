@@ -212,33 +212,6 @@ const UpdateComic = () => {
               />
             </div>
 
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">targetAge</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter targetAge"
-                className="w-full input input-bordered"
-                name="targetAge"
-                value={comic.targetAge}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label className="label">
-                <span className="text-base label-text text-black">description</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Enter description"
-                className="w-full input input-bordered"
-                name="description"
-                value={comic.description}
-                onChange={handleChange}
-              />
-            </div>
 
             <div>
               <label className="label">

@@ -20,7 +20,6 @@ const BookCard = (props) => {
   return (
     <div className="w-80 bg-gradient-to-br from-purple-50 via-yellow-50 to-purple-50 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden transform hover:scale-105">
       <div className="p-5">
-        {/* Cover Image */}
         {props.coverImage ? (
           <img
             src={props.coverImage}
@@ -41,9 +40,9 @@ const BookCard = (props) => {
         {/* Info */}
         <div className="text-gray-700 space-y-2 text-sm">
           <p><strong>Author:</strong> {props.author}</p>
-          <p><strong>Genre:</strong> {props.genre}</p>
-          <p><strong>Publication Date:</strong> {props.publicationDate}</p>
-          <p><strong>ISBN:</strong> {props.isbn}</p>
+          <p><strong>Category:</strong> {props.category}</p>
+          <p><strong>Language:</strong> {props.language}</p>
+          <p><strong>PageCount:</strong> {props. pageCount}</p>
         </div>
 
         {/* Buttons */}

@@ -13,7 +13,10 @@ export const BookList = ({ books }) => {
               itemId={book.itemId}
               title={book.title}
               author={book.author}
-              isbn={book.isbn}
+              category={book.category}
+              publishYear={book.publishYear}
+              language={book.language}
+               pageCount={book. pageCount}
               genre={book.genre}
               publicationDate={book.publicationDate}
             

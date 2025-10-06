@@ -42,7 +42,7 @@ const Books = () => {
         </div>
       </div>
 
-      {/* Book List */}
+     
       <BookList books={books} />
     </div>
   );

@@ -3,8 +3,8 @@ import JournalList from "../components/JournalList";
 import Swal from "sweetalert2";
 import JournalService from "../services/journal.service";
 
-const Journals = () => {
-  const [journals, setJournals] = useState([]);
+const Journal = () => {
+  const [journal, setJournals] = useState([]);
 
   useEffect(() => {
     const getAllJournal = async () => {
@@ -41,13 +41,11 @@ const Journals = () => {
         </div>
       </div>
 
-      {journals && journals.length > 0 ? (
-        <JournalList journals={journals} />
-      ) : (
-        <p className="text-center text-gray-500 text-lg">ยังไม่มีวารสาร</p>
-      )}
+      
+        <JournalList journal={journal} />
+     
     </div>
   );
 };
 
-export default Journals;
+export default Journal;
