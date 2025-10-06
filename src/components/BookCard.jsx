@@ -2,6 +2,7 @@ import React from "react";
 import BookService from "../services/book.service";
 
 const BookCard = (props) => {
+  
   const handleDelete = async (itemId) => {
     const isConfirmed = window.confirm("แน่ใจไหมว่าจะลบหนังสือเล่มนี้?");
     if (!isConfirmed) return;

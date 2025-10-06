@@ -15,7 +15,7 @@ const NavBar = () => {
     path.startsWith(p)
   );
 
-  let addButtonText = "Add Item";
+  let addButtonText = "Add Books";
   let addButtonLink = "/addBook";
 
   if (isBookPath) {

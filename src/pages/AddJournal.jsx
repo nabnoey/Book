@@ -88,7 +88,7 @@ const AddJournal = () => {
           icon: "success",
         });
         resetForm();
-        navigate("/");
+        navigate("/journals");
       }
     } catch (error) {
       await Swal.fire({

@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import BookServices from "../services/book.service";
-import ComicService from "../services/comic.service";
-import JournalService from "../services/journal.service";
 import ItemService from "../services/item.service"
 import BookCard from "../components/BookCard";
 const Home = () => {

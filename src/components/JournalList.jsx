@@ -1,10 +1,12 @@
 import { JournalCard } from "./JournalCard";
 
-const JournalList = ({ journals }) => {
+const JournalList = ({ journal }) => {
     return (
         <div className="flex">
             <div className="flex flex-wrap justify-center gap-4">
-                    {journals && journals.map((journal) => (
+                
+                    {journal && journal.map((journal) => (
+                        
                     <JournalCard
                         key={journal.itemId}
                         itemId={journal.itemId}
