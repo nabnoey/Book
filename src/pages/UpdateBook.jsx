@@ -26,7 +26,6 @@ const UpdateBook = () => {
     const updateBook = async (id) => {
       try {
         const resp = await BookService.getBookById(id);
-        // console.log(resp.data.data);
         if (resp.status === 200) {
           setBook(resp.data.data);
         }
