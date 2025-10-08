@@ -33,11 +33,12 @@ const BookCard = (props) => {
           </div>
         )}
 
-        
+       
         <h2 className="text-2xl font-bold text-purple-700 mb-3 drop-shadow-sm">
           {props.title}
         </h2>
 
+       
         <div className="text-gray-700 space-y-2 text-sm">
           <p><strong>Author:</strong> {props.author}</p>
           <p><strong>Category:</strong> {props.category}</p>
@@ -53,12 +54,12 @@ const BookCard = (props) => {
           >
             Delete
           </button>
-          <button
+          <a
             href={`/updateBook/${props.itemId}`}
             className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-4 py-2 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
           >
             Edit
-          </button>
+          </a>
         </div>
       </div>
     </div>
