@@ -78,7 +78,7 @@ const UpdateJournal = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Title */}
+         
           <div>
             <label className="block mb-1 font-semibold text-purple-700">Title</label>
             <input
@@ -92,7 +92,7 @@ const UpdateJournal = () => {
             />
           </div>
 
-          {/* Author & Category */}
+         
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Author</label>
@@ -118,7 +118,7 @@ const UpdateJournal = () => {
             </div>
           </div>
 
-          {/* Publish Year & ISSN */}
+        
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Publish Year</label>
@@ -143,7 +143,6 @@ const UpdateJournal = () => {
             </div>
           </div>
 
-          {/* Volume & Issue */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Volume</label>
@@ -167,7 +166,7 @@ const UpdateJournal = () => {
             </div>
           </div>
 
-          {/* Publisher & Description */}
+          
           <div>
             <label className="block mb-1 font-semibold text-purple-700">Publisher</label>
             <input
@@ -191,7 +190,7 @@ const UpdateJournal = () => {
             />
           </div>
 
-          {/* Cover Image */}
+       
           <div>
             <label className="block mb-1 font-semibold text-purple-700">Cover Image URL</label>
             <input
@@ -213,7 +212,7 @@ const UpdateJournal = () => {
             )}
           </div>
 
-          {/* Submit Button */}
+         
           <div className="flex justify-center mt-6">
             <button
               type="submit"

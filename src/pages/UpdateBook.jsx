@@ -82,7 +82,7 @@ const UpdateBook = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Title */}
+        
           <div>
             <label className="block mb-1 font-semibold text-purple-700">Title</label>
             <input
@@ -96,7 +96,7 @@ const UpdateBook = () => {
             />
           </div>
 
-          {/* Author & Category */}
+          
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Author</label>
@@ -122,7 +122,7 @@ const UpdateBook = () => {
             </div>
           </div>
 
-          {/* Publish Year & ISBN */}
+         
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Publish Year</label>
@@ -147,7 +147,7 @@ const UpdateBook = () => {
             </div>
           </div>
 
-          {/* Publisher & Edition */}
+          
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Publisher</label>
@@ -171,7 +171,7 @@ const UpdateBook = () => {
             </div>
           </div>
 
-          {/* Page Count & Language */}
+          
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Page Count</label>
@@ -196,7 +196,7 @@ const UpdateBook = () => {
             </div>
           </div>
 
-          {/* Genre & Description */}
+         
           <div>
             <label className="block mb-1 font-semibold text-purple-700">Genre</label>
             <input
@@ -220,7 +220,7 @@ const UpdateBook = () => {
             />
           </div>
 
-          {/* Cover Image */}
+          
           <div>
             <label className="block mb-1 font-semibold text-purple-700">Cover Image URL</label>
             <input
@@ -242,7 +242,7 @@ const UpdateBook = () => {
             )}
           </div>
 
-          {/* Submit Button */}
+          
           <div className="flex justify-center mt-6">
             <button
               type="submit"

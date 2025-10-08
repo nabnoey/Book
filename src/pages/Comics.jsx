@@ -27,7 +27,7 @@ const Comics = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 bg-gradient-to-b from-purple-50 to-yellow-50 min-h-screen">
-      {/* Header */}
+    
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-purple-700 mb-4 drop-shadow-md">
           Comics
@@ -35,7 +35,7 @@ const Comics = () => {
         
       </div>
 
-      {/* Comic List */}
+      
       <ComicList comics={comics} />
     </div>
   );

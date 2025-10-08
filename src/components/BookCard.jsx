@@ -33,12 +33,11 @@ const BookCard = (props) => {
           </div>
         )}
 
-        {/* Title */}
+        
         <h2 className="text-2xl font-bold text-purple-700 mb-3 drop-shadow-sm">
           {props.title}
         </h2>
 
-        {/* Info */}
         <div className="text-gray-700 space-y-2 text-sm">
           <p><strong>Author:</strong> {props.author}</p>
           <p><strong>Category:</strong> {props.category}</p>
@@ -46,7 +45,7 @@ const BookCard = (props) => {
           <p><strong>PageCount:</strong> {props. pageCount}</p>
         </div>
 
-        {/* Buttons */}
+       
         <div className="flex justify-between mt-6">
           <button
             onClick={() => handleDelete(props.itemId)}
@@ -54,12 +53,12 @@ const BookCard = (props) => {
           >
             Delete
           </button>
-          <a
+          <button
             href={`/updateBook/${props.itemId}`}
             className="flex-1 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold px-4 py-2 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
           >
             Edit
-          </a>
+          </button>
         </div>
       </div>
     </div>
