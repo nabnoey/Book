@@ -3,10 +3,18 @@ import BookService from "../services/book.service.js";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 
-
-const Input = ({ label, name, value, onChange, type = "text", required = false }) => (
+const Input = ({
+  label,
+  name,
+  value,
+  onChange,
+  type = "text",
+  required = false,
+}) => (
   <div>
-    <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">{label}</label>
+    <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">
+      {label}
+    </label>
     <input
       type={type}
       name={name}
@@ -77,12 +85,15 @@ const AddBook = () => {
       return acc;
     }, {});
 
-    const filteredBookData = Object.entries(cleanedData).reduce((acc, [key, value]) => {
-      if (value !== "") {
-        acc[key] = value;
-      }
-      return acc;
-    }, {});
+    const filteredBookData = Object.entries(cleanedData).reduce(
+      (acc, [key, value]) => {
+        if (value !== "") {
+          acc[key] = value;
+        }
+        return acc;
+      },
+      {}
+    );
 
     try {
       const newBook = await BookService.createBook(filteredBookData);
@@ -112,7 +123,6 @@ const AddBook = () => {
         onSubmit={handleSubmit}
         className="w-full max-w-4xl bg-white/80 backdrop-blur-lg p-10 rounded-3xl shadow-lg border border-purple-100 hover:shadow-2xl hover:shadow-amber-200 transition-all duration-500"
       >
-        {/* Header */}
         <h1 className="text-5xl font-serif font-extrabold text-center bg-gradient-to-r from-purple-600 via-pink-500 to-amber-400 bg-clip-text text-transparent mb-2">
           Add New Book
         </h1>
@@ -120,24 +130,50 @@ const AddBook = () => {
           Record a new treasure in your library shelf.
         </p>
 
-        {/* Section 1 */}
         <h2 className="text-2xl font-serif font-bold text-purple-700 mb-4 border-b-2 border-amber-200 pb-2">
           📘 Book Essentials
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Input label="Title" name="title" value={book.title} onChange={handleChange} required />
-          <Input label="Author" name="author" value={book.author} onChange={handleChange} required />
-          <Input label="Category" name="category" value={book.category} onChange={handleChange} />
-          
+          <Input
+            label="Title"
+            name="title"
+            value={book.title}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label="Author"
+            name="author"
+            value={book.author}
+            onChange={handleChange}
+            required
+          />
+          <Input
+            label="Category"
+            name="category"
+            value={book.category}
+            onChange={handleChange}
+          />
         </div>
 
-        {/* Section 2
         <h2 className="text-2xl font-serif font-bold text-purple-700 mb-4 border-b-2 border-amber-200 pb-2">
           🏛️ Publication Info
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-          <Input label="ISBN" name="isbn" value={book.isbn} onChange={handleChange} />
-          <Input label="Publisher" name="publisher" value={book.publisher} onChange={handleChange} />
+          {/* <Input
+            label="ISBN"
+            name="isbn"
+             type="text"
+            value={book.isbn}
+            onChange={handleChange}
+          /> */}
+          <Input
+            label="Publisher"
+            name="publisher"
+             type="text"
+            value={book.publisher}
+            onChange={handleChange}
+          />
           <Input
             label="Publish Year"
             name="publishYear"
@@ -145,14 +181,18 @@ const AddBook = () => {
             value={book.publishYear}
             onChange={handleChange}
           />
-        </div> */}
+        </div>
 
-        {/* Section 3 */}
         <h2 className="text-2xl font-serif font-bold text-purple-700 mb-4 border-b-2 border-amber-200 pb-2">
           📖 Physical Details
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-          <Input label="Edition" name="edition" value={book.edition} onChange={handleChange} />
+          <Input
+            label="Edition"
+            name="edition"
+            value={book.edition}
+            onChange={handleChange}
+          />
           <Input
             label="Page Count"
             name="pageCount"
@@ -160,14 +200,32 @@ const AddBook = () => {
             value={book.pageCount}
             onChange={handleChange}
           />
-          <Input label="Language" name="language" value={book.language} onChange={handleChange} />
+          <Input
+            label="Language"
+            name="language"
+            value={book.language}
+            onChange={handleChange}
+          />
+
+          <Input
+            label="Genre"
+            name="genre"
+            value={book.genre}
+            onChange={handleChange}
+          />
+
+              <Input
+              label="Description"
+              name="description"
+              value={book.description}
+              onChange={handleChange}
+              required
+            />
         </div>
 
-        {/* Description & Image */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        
-
           <div>
+
             <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">
               Cover Image URL
             </label>
@@ -192,14 +250,15 @@ const AddBook = () => {
           </div>
         </div>
 
-        {/* Location */}
         <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-amber-50 border border-amber-200 rounded-xl">
           <p className="text-sm text-purple-700 font-semibold">
-            📍 Shelf Location: <span className="font-mono text-lg text-amber-700">{book.location}</span>
+            📍 Shelf Location:{" "}
+            <span className="font-mono text-lg text-amber-700">
+              {book.location}
+            </span>
           </p>
         </div>
 
-        {/* Buttons */}
         <div className="flex justify-center items-center mt-12 space-x-6">
           <button
             type="submit"

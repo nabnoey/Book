@@ -27,15 +27,14 @@ const AddJournal = () => {
     category: "",
     publishYear: "",
     isbn: "",
+    issn:"",
+    issue:"",
+    volume:"",
     publisher: "",
-    edition: "",
-    pageCount: "",
-    language: "",
-    genre: "",
     description: "",
     coverImage: "",
     location: "A1-B2-C3",
-    publicationFrequency: "",
+    publicationFrequency: "MONTHLY",
   });
 
   const handleChange = (e) => {
@@ -47,19 +46,18 @@ const AddJournal = () => {
   const resetForm = () => {
     setJournal({
       title: "",
-      author: "",
-      category: "",
-      publishYear: "",
-      isbn: "",
-      publisher: "",
-      edition: "",
-      pageCount: "",
-      language: "",
-      genre: "",
-      description: "",
-      coverImage: "",
-      location: "A1-B2-C3",
-      publicationFrequency: "",
+    author: "",
+    category: "",
+    publishYear: "",
+    isbn: "",
+    issn:"",
+    issue:"",
+        volume:"",
+    publisher: "",
+    description: "",
+    coverImage: "",
+    location: "A1-B2-C3",
+    publicationFrequency: "MONTHLY",
     });
   };
 
@@ -120,9 +118,13 @@ const AddJournal = () => {
           <Input label="Title" name="title" value={journal.title} onChange={handleChange} required />
           <Input label="Author" name="author" value={journal.author} onChange={handleChange} />
           <Input label="Category" name="category" value={journal.category} onChange={handleChange} />
-
-          {/* <Input label="Publication Frequency" name="publicationFrequency" value={journal.publicationFrequency} onChange={handleChange} />
-          <Input label="Publisher" name="publisher" value={journal.publisher} onChange={handleChange} /> */}
+           <Input label="Volume" name="volume" value={journal.volume} onChange={handleChange} />
+            {/* <Input label="Issn" name="issn" value={journal.issn} onChange={handleChange} /> */}
+             <Input label="issue" name="issue" value={journal.issue} onChange={handleChange} />
+              <Input label="PublishYear" name="publishYear" value={journal.publishYear} onChange={handleChange} />
+              <Input label="PublicationFrequency" name="publicationFrequency" value={journal.publicationFrequency} onChange={handleChange} />
+        
+          <Input label="Publisher" name="publisher" value={journal.publisher} onChange={handleChange} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -165,12 +167,7 @@ const AddJournal = () => {
           </div>
         </div>
 
-        <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-amber-50 border border-amber-200 rounded-xl">
-          <p className="text-sm text-purple-700 font-semibold">
-            📍 Shelf Location:{" "}
-            <span className="font-mono text-lg text-amber-700">{journal.location}</span>
-          </p>
-        </div>
+        
 
         <div className="flex justify-center items-center mt-12 space-x-6">
           <button

@@ -79,7 +79,7 @@ const UpdateComic = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-5 text-purple-800">
-          {/* Title */}
+         
           <div>
             <label className="block mb-1 font-semibold text-purple-700">Title</label>
             <input
@@ -93,7 +93,6 @@ const UpdateComic = () => {
             />
           </div>
 
-          {/* Author & Category */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Author</label>
@@ -119,7 +118,7 @@ const UpdateComic = () => {
             </div>
           </div>
 
-          {/* Publish Year & ISBN */}
+         
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Publish Year</label>
@@ -144,7 +143,7 @@ const UpdateComic = () => {
             </div>
           </div>
 
-          {/* Series & Volume */}
+        
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Series</label>
@@ -169,7 +168,6 @@ const UpdateComic = () => {
             </div>
           </div>
 
-          {/* Illustrator & Color Type */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 font-semibold text-purple-700">Illustrator</label>
@@ -193,7 +191,6 @@ const UpdateComic = () => {
             </div>
           </div>
 
-          {/* Cover Image */}
           <div>
             <label className="block mb-1 font-semibold text-purple-700">Cover Image URL</label>
             <input
@@ -215,7 +212,6 @@ const UpdateComic = () => {
             )}
           </div>
 
-          {/* Submit Button */}
           <div className="flex justify-center mt-6">
             <button
               type="submit"

@@ -3,21 +3,6 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 import ComicService from "../services/comic.service";
 
-const Input = ({ label, name, value, onChange, type = "text", required = false }) => (
-  <div>
-    <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">{label}</label>
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      placeholder={`Enter ${label.toLowerCase()}`}
-      required={required}
-      className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 transition-all duration-200 shadow-sm text-gray-800 placeholder-gray-400"
-    />
-  </div>
-);
-
 const AddComics = () => {
   const navigate = useNavigate();
 
@@ -31,6 +16,8 @@ const AddComics = () => {
     volumeNumber: "",
     illustrator: "",
     colorType: "",
+    targetAge: "",
+    description: "",
     coverImage: ""
   });
 
@@ -51,45 +38,44 @@ const AddComics = () => {
       volumeNumber: "",
       illustrator: "",
       colorType: "",
+      targetAge: "",
+      description: "",
       coverImage: ""
     });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const numericFields = ["publishYear", "volumeNumber"];
-  const payload = Object.entries(comic).reduce((acc, [key, value]) => {
-    if (numericFields.includes(key) && value !== "") {
-      acc[key] = Number(value);
-    } else if (value !== "") {
-      acc[key] = value;
-    }
-    return acc;
-  }, {});
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const numericFields = ["publishYear", "volumeNumber"];
+    const payload = Object.entries(comic).reduce((acc, [key, value]) => {
+      if (numericFields.includes(key) && value !== "") {
+        acc[key] = Number(value);
+      } else if (value !== "") {
+        acc[key] = value;
+      }
+      return acc;
+    }, {});
 
-
-
-  try {
-    const res = await ComicService.createComic(payload);
-    if (res.status === 201 || res.status === 200) {
-      await Swal.fire({
-        title: "🎉 Comic Added Successfully!",
-        text: `"${comic.title}" has been added to your collection.`,
-        icon: "success",
+    try {
+      const res = await ComicService.createComic(payload);
+      if (res.status === 201 || res.status === 200) {
+        await Swal.fire({
+          title: "🎉 Comic Added Successfully!",
+          text: `"${comic.title}" has been added to your collection.`,
+          icon: "success",
+        });
+        resetForm();
+        navigate("/comics");
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "Error ❌",
+        text: error.response?.data?.message || error.message || "Failed to add comic.",
+        icon: "error",
       });
-      resetForm();
-      navigate("/");
+      console.error("Create comic error:", error);
     }
-  } catch (error) {
-    Swal.fire({
-      title: "Error ❌",
-      text: error.response?.data?.message || error.message || "Failed to add comic.",
-      icon: "error",
-    });
-    console.error("Create comic error:", error);
-  }
-};
-
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 via-amber-50 to-white py-12 px-4 sm:px-6 lg:px-8 font-sans">
@@ -105,26 +91,144 @@ const handleSubmit = async (e) => {
         </p>
 
         <h2 className="text-2xl font-serif font-bold text-purple-700 mb-4 border-b-2 border-amber-200 pb-2">
-          📘 Comic Details
+          📘 Comic Essentials
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Input label="Title" name="title" value={comic.title} onChange={handleChange} required />
-          <Input label="Author" name="author" value={comic.author} onChange={handleChange} />
-          <Input label="Category" name="category" value={comic.category} onChange={handleChange} />
-          {/* <Input label="ISBN" name="isbn" value={comic.isbn} onChange={handleChange} /> */}
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Title</label>
+            <input
+              type="text"
+              name="title"
+              value={comic.title}
+              onChange={handleChange}
+              required
+              placeholder="Enter title"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 transition-all duration-200 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Author</label>
+            <input
+              type="text"
+              name="author"
+              value={comic.author}
+              onChange={handleChange}
+              placeholder="Enter author"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 transition-all duration-200 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Category</label>
+            <input
+              type="text"
+              name="category"
+              value={comic.category}
+              onChange={handleChange}
+              placeholder="Enter category"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 transition-all duration-200 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
         </div>
 
         <h2 className="text-2xl font-serif font-bold text-purple-700 mb-4 border-b-2 border-amber-200 pb-2">
           📚 Publication Info
-        </h2> 
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-          <Input label="Series" name="series" value={comic.series} onChange={handleChange} />
-          {/* <Input label="volumeNumber" name="volumeNumber" type="number" value={comic.volumeNumber} onChange={handleChange} /> */}
-          <Input label="Publish Year" name="publishYear" type="number" value={comic.publishYear} onChange={handleChange} />
-          <Input label="Illustrator" name="illustrator" value={comic.illustrator} onChange={handleChange} />
-          {/* <Input label="Color Type" name="colorType" value={comic.colorType} onChange={handleChange} /> */}
-          <Input label="Cover Image URL" name="coverImage" value={comic.coverImage} onChange={handleChange} />
-        </div> 
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Series</label>
+            <input
+              type="text"
+              name="series"
+              value={comic.series}
+              onChange={handleChange}
+              placeholder="Enter series"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Volume Number</label>
+            <input
+              type="number"
+              name="volumeNumber"
+              value={comic.volumeNumber}
+              onChange={handleChange}
+              placeholder="Enter volume number"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Publish Year</label>
+            <input
+              type="number"
+              name="publishYear"
+              value={comic.publishYear}
+              onChange={handleChange}
+              placeholder="Enter publish year"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Illustrator</label>
+            <input
+              type="text"
+              name="illustrator"
+              value={comic.illustrator}
+              onChange={handleChange}
+              placeholder="Enter illustrator"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Color Type</label>
+            <input
+              type="text"
+              name="colorType"
+              value={comic.colorType}
+              onChange={handleChange}
+              placeholder="Enter color type"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Target Age</label>
+            <input
+              type="text"
+              name="targetAge"
+              value={comic.targetAge}
+              onChange={handleChange}
+              placeholder="Enter target age"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-serif font-bold text-purple-700 mb-4 border-b-2 border-amber-200 pb-2">
+          📖 Description & Cover
+        </h2>
+        <div className="grid grid-cols-1 gap-6 mb-8">
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Description</label>
+            <textarea
+              name="description"
+              value={comic.description}
+              onChange={handleChange}
+              placeholder="Enter description"
+              rows={4}
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 shadow-sm text-gray-800 placeholder-gray-400 resize-none"
+            />
+          </div>
+          <div>
+            <label className="block text-purple-900 font-serif font-semibold mb-2 text-sm">Cover Image URL</label>
+            <input
+              type="text"
+              name="coverImage"
+              value={comic.coverImage}
+              onChange={handleChange}
+              placeholder="https://example.com/cover.jpg"
+              className="w-full border border-purple-200 focus:ring-2 focus:ring-amber-400 focus:border-amber-400 rounded-lg p-3 bg-white/80 shadow-sm text-gray-800 placeholder-gray-400"
+            />
+          </div>
+        </div>
 
         {comic.coverImage && (
           <div className="mt-4 flex flex-col items-center">
